@@ -6,7 +6,11 @@ services:
     ports:
       - "80:80"
     environment:
-      DATABASE_URL: postgresql://studentuser:password@db/studentdb
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: studentdb
+      PGUSER: studentuser
+      PGPASSWORD: password
     depends_on:
       - db
 
@@ -18,3 +22,5 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
